@@ -25,29 +25,31 @@ class ViewController: UIViewController {
         configureDataSource()
     }
     private func createLayout() -> UICollectionViewLayout{
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                              heightDimension: .fractionalWidth(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalHeight(0.2) )
-
-//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-//                                             heightDimension: .fractionalHeight(1.0))
+//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+//                                              heightDimension: .fractionalWidth(0.5))
 //        let item = NSCollectionLayoutItem(layoutSize: itemSize)
 //
 //        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                              heightDimension: .fractionalWidth(0.2))
+//                                               heightDimension: .fractionalHeight(0.2) )
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                             heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(44))
+
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        group.interItemSpacing = .fixed(10)
+
         let section = NSCollectionLayoutSection(group: group)
-
+        section.interGroupSpacing = 20.0
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
         return UICollectionViewCompositionalLayout(section: section)
     }
     private func configureHierarchy(){
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         view.addSubview(collectionView)
-        collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.register(CustomCell.self, forCellWithReuseIdentifier: CustomCell.reuseIdentifier)
 
 

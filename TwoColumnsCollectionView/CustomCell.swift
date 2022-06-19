@@ -11,6 +11,7 @@ class CustomCell: UICollectionViewCell {
     static let reuseIdentifier = "Custom"
     var label : UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textColor = .black
         label.textAlignment = .center
@@ -31,7 +32,7 @@ class CustomCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ])
